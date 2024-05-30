@@ -1,0 +1,31 @@
+{
+  "name": "animated-flex-box",
+  "version": "0.0.1-alpha.1",
+  "description": "",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc && npm run copy",
+    "copy": "cp -r src/*.css dist"
+  },
+  "peerDependencies": {
+    "react": "^16"
+  },
+  "keywords": [],
+  "author": "hezhixian",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/react": "^18.3.3",
+    "typescript": "^5.4.5"
+  },
+  "dependencies": {
+    "@react-spring/web": "^9.7.3"
+  }
+}
