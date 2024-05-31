@@ -22,14 +22,13 @@ interface IProps {
   columnGap?: number;
   rowGap?: number;
   padding?: number
-  delay?: number;
   springAdaption?: UseSpringsProps;
   staticLaunch?: boolean;
-  estimateSingleDuration?: number;
+  interval?: number;
 }
 
 
-const AnimatedBox: FC<PropsWithChildren<IProps>> = ({ children, itemWidth, itemHeight, className, style, columnGap = 0, rowGap = 0, padding = 0, delay = 0, springAdaption, staticLaunch = true, estimateSingleDuration = 300 }) => {
+const AnimatedBox: FC<PropsWithChildren<IProps>> = ({ children, itemWidth, itemHeight, className, style, columnGap = 0, rowGap = 0, padding = 0, springAdaption, staticLaunch = true, interval = 0 }) => {
   const boxRef = useRef<HTMLDivElement>(null);
 
   const layoutInitFlag = useRef(false);
@@ -74,7 +73,7 @@ const AnimatedBox: FC<PropsWithChildren<IProps>> = ({ children, itemWidth, itemH
       api.start(i => ({
         x: posList[i][0],
         y: posList[i][1],
-        delay: (!layoutInitFlag.current || isStaticLaunch) ? 0 : (delay >= 0 ? i * delay : childrenLength * estimateSingleDuration + i * delay),
+        delay: (!layoutInitFlag.current || isStaticLaunch) ? 0 : (interval >= 0 ? i * interval : childrenLength * interval + i * interval),
         immediate: !layoutInitFlag.current || isStaticLaunch,
         ...springAdaption,
       }));
@@ -86,7 +85,7 @@ const AnimatedBox: FC<PropsWithChildren<IProps>> = ({ children, itemWidth, itemH
     observer.observe(boxRef.current!);
 
     return () => observer.disconnect();
-  }, [getItemPos, api, delay, springAdaption, staticLaunch, childrenLength, estimateSingleDuration]);
+  }, [getItemPos, api, springAdaption, staticLaunch, childrenLength, interval]);
 
 
   return (
